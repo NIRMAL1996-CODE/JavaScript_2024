@@ -1,7 +1,7 @@
 //create the variables in javascript.//
 a=10;
 console.log(a);
-a=20.7;
+a=100.9;
 console.log(a);
 a ="nirmal";
 console.log(a);
