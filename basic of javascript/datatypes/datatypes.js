@@ -5,7 +5,7 @@ b="nirmal";
 c= 8.9;
 d= [1,2,3,4,5];
 e= true;
-f= 'q';//in js, txt in any quotes is string.//
+f= 'q';//in js, txt in any quotes is string. //
 
  console.log(a,typeof(a));
  console.log(a,typeof(b));
