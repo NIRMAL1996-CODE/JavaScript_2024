@@ -7,6 +7,6 @@ a ="nirmal";
 console.log(a);
 //there is no need to mention datatypes in js//
 b=6;
-console.log(b);
+console.log(b) ; 
 b++;
 console.log(b);
