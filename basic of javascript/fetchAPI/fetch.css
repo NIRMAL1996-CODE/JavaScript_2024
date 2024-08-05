@@ -1,0 +1,8 @@
+#btn{
+    background-color: yellow;
+    font-size: medium;
+    cursor: pointer;
+}
+#btn:hover{
+    background-color: rgb(195, 195, 246);
+}
