@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+padding: 0;
+}
+
+div{
+    
+    height: 300px;
+    width: 300px;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#button{
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: large;
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px; 
+}
+#button:hover{
+    background-color: grey;
+}
