@@ -4,7 +4,7 @@ body{
 }
 
 .container{
-    height: 70vh;
+    height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,11 +28,29 @@ body{
     font-size: 8vmin;
     color: brown;
 }
-#reset-btn{
+#reset-Btn{
     padding: 1rem;
     font-size: 1,25rem;
     background-color: rgb(18, 18, 18);
     color: aliceblue;
     border-radius: 1rem;
     border: none;
+
+}
+
+#new-btn{
+    padding: 1rem;
+    font-size: 1,25rem;
+    background-color: rgb(18, 18, 18);
+    color: aliceblue;
+    border-radius: 1rem;
+    border: none;
+}
+
+#msg{
+    color: rgb(239, 239, 131);
+    font-size: 8vmin;
+}
+.hide{
+    display: none;
 }
