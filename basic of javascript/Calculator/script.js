@@ -18,5 +18,6 @@ buttons.forEach(button =>{
         else{
             display.value += buttonText; 
         }
+        
     });
 });
