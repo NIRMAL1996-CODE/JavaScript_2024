@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(237, 165, 141);
+    text-align: center;
+}
+h1{
+    margin: 10px;
+}
+
+.container{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+.grid{
+    height: 60vmin;
+    width: 60vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5vh;
+}
+.box{
+    width: 18vmin;
+    height: 18vmin;
+    border: none;
+}
+
+.btn{
+    padding: 10px;
+    font-size: medium;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.btn:hover{
+    background-color: black;
+    color: white;
+}
+#record{
+    border: 1px solid black;
+    height: 50px;
+    width: 200px;
+   margin: 10px auto;
+   
+}
+.lit {
+    background-color: yellow; /* Example style to make the box stand out */
+}
