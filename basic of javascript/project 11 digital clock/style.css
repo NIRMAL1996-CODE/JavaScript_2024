@@ -18,12 +18,17 @@ body{
 }
 
 .time{
-  
+    align-items: center;
     width: 500px;
     display: flex;
     justify-content: center;
     padding: 10px;
 
+}
+
+.colon {
+    margin: 0 5px;
+    font-size: large;
 }
 .box{
     background-color: lightseagreen;
