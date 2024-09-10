@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.search-panel{
+    margin: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.search-panel input{
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 4px 0 0 4px;
+    flex: 1;
+}
+.search-panel button{
+  background-color: #1b80ed;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius:0 4px 4px 0;
+  font-size: medium;
+  border-left: none;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+.search-panel button i{
+    margin-right: 5px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table , th, td{
+    border: 1px solid rgb(86, 85, 85);
+}
+
+th, td{
+    padding: 10px;
+    text-align: center;
+}
+th{
+    background-color: #f3a1a1;
+}
+.pagination{
+    margin: 20px;
+    text-align: center;
+}
+
+.pagination button{
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 1px solid rgb(86, 85, 85);
+    background-color: rgb(147, 147, 240);
+    color: rgb(99, 97, 97);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination button:hover{
+    background-color: #ddd;
+}
+
+.deleteselected{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: 1px solid grey;
+    background-color: rgb(85, 84, 84);
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.deleteselected:hover{
+    background-color: rgb(247, 6, 6);
+}
