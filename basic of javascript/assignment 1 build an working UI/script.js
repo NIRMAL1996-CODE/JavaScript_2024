@@ -6,7 +6,7 @@ p.then((response)=>{
         return response.json();
 }).then((data)=>{
     console.log(data);
-    // const user =data[0];
+    const container= document.querySelector(".container");
     const userDiv= document.createElement("div");
     const table =document.createElement("table");
     const tableHeader=document.createElement("thead");
@@ -14,25 +14,47 @@ p.then((response)=>{
     
     tableHeader.innerHTML =
     `<tr>
+         <th></th>
          <th>ID</th>
          <th>NAME</th>
          <th>EMAIL</th>
-         <th>ROLE</th></tr>`;
+         <th>ROLE</th>
+         <th>EDIT</th>
+         <th>DELETE</th></tr>`;
 
      data.forEach((user) => {
         const row= document.createElement("tr");
         row.innerHTML =`
+        <td><input type="checkbox" class="row-checkbox"></td>
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td>${user.email}</td>
-        <td>${user.role}</td>`;
+        <td>${user.role}</td>
+        <td><button id="edit"><i class="fa-solid fa-pen-to-square"></i></button></td>
+        <td><button id="del"><i class="fa-solid fa-trash"></i></button></td>`;
 
+        
         tablebody.appendChild(row);
         table.appendChild(tableHeader);
         table.appendChild(tablebody);
         userDiv.appendChild(table);
-        document.body.appendChild(userDiv);})
+        container.appendChild(userDiv)
+       document.body.appendChild(container);
+    })
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 simple fetched data n show on page usinf these mehtods//
