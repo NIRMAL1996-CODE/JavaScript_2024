@@ -5,24 +5,25 @@
 }
 
 body{
+    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 .search-panel{
-    margin: 20px;
+    /* margin: 10px; */
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .search-panel input{
     padding: 10px;
-    font-size: 16px;
+    font-size: 10px;
     border: 1px solid black;
     border-radius: 4px 0 0 4px;
     flex: 1;
 }
 .search-panel button{
-  background-color: #1b80ed;
-  color: white;
+    color: rgb(4, 4, 58);
   cursor: pointer;
   padding: 10px;
   border-radius:0 4px 4px 0;
@@ -32,6 +33,7 @@ body{
   display: flex;
   align-items: center;
 }
+
 .search-panel button i{
     margin-right: 5px;
 }
@@ -39,7 +41,7 @@ body{
 table{
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 table , th, td{
@@ -47,12 +49,26 @@ table , th, td{
 }
 
 th, td{
-    padding: 10px;
+    padding: 5px;
     text-align: center;
 }
 th{
-    background-color: #f3a1a1;
+    background-color: #79dd86;
 }
+button{
+    font-size: larger;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+ #edit:hover{
+    background-color: rgb(23, 122, 61);
+}
+#del:hover{
+    background-color: red;
+}
+
+
 .pagination{
     margin: 20px;
     text-align: center;
