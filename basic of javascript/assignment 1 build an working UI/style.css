@@ -62,7 +62,7 @@ button{
     padding: 5px;
 }
  #edit:hover{
-    background-color: rgb(23, 122, 61);
+     background-color: rgb(23, 122, 61);
 }
 #del:hover{
     background-color: red;
