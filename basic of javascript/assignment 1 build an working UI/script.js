@@ -79,7 +79,7 @@ p.then((response)=>{
       currentPage=1;
       selectALLcheckbox.checked = false; 
       displayPage(currentPage);
-     });
+      });
 
      previousPage.addEventListener("click",()=>{
       if(currentPage>1)
