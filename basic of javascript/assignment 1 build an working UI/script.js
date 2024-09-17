@@ -42,10 +42,10 @@ p.then((response)=>{
 
      //events to checkboxes
      const selectALLcheckbox= document.querySelector(".selectAll");
-     const rowcheckbox= document.querySelectorAll(".row-checkbox");
      selectALLcheckbox.addEventListener("change",()=>{
-        rowcheckbox.forEach(checkbox=>{
-            checkbox.checked =selectALLcheckbox.checked;
+      const rowcheckbox= document.querySelectorAll(".row-checkbox");
+        rowcheckbox.forEach((checkbox)=>{
+            checkbox.checked = selectALLcheckbox.checked;
         });
      });
 
@@ -77,26 +77,68 @@ p.then((response)=>{
      //add events to buttons.
      firstPage.addEventListener("click",()=>{
       currentPage=1;
+      selectALLcheckbox.checked = false; 
       displayPage(currentPage);
      });
 
      previousPage.addEventListener("click",()=>{
       if(currentPage>1)
          currentPage--;
+      selectALLcheckbox.checked = false; 
       displayPage(currentPage);
      });
      
      nextPage.addEventListener("click",()=>{
       if(currentPage<totalPages)
          currentPage++;
+      selectALLcheckbox.checked = false; 
       displayPage(currentPage);
      });
 
      lastPage.addEventListener("click",()=>{
       currentPage=totalPages;
+      selectALLcheckbox.checked = false; 
       displayPage(currentPage);
      });
    
+     //add events to deleteALLselected button
+     const del =document.querySelector(".deleteselected");
+     del.addEventListener("click",()=>{
+      const selectALLcheckboxes= document.querySelectorAll(".row-checkbox:checked");
+      selectALLcheckboxes.forEach((checkbox)=>{
+           const row= checkbox.closest("tr");
+           const userId = row.children[1].textContent; 
+           row.remove();
+           const updatedData = data.filter(user => user.id !== userId);
+           data = updatedData;
+      });
+    });
+
+    const delbutton= document.querySelectorAll("#del");
+    delbutton.forEach((button)=>{
+      button.addEventListener("click",(event)=>{
+         const row = event.target.closest("tr");
+         const userId =row.children[1].textContent;
+         row.remove();
+         data = data.filter(user => user.id !== userId);
+      });
+    });
+
+    const edit= document.querySelectorAll("#edit");
+    edit.forEach((button)=>{
+      button.addEventListener("click",(event)=>{
+         const row= event.target.closest("tr");
+         const userId = row.children[1].textContent;
+         const userName =row.children[2].textContent;
+         const userEmail =row.children[3].textContent;
+         const userRole =row.children[4].textContent;
+
+      //    document.querySelector('#edit-id').value = userId;
+      //   document.querySelector('#edit-name').value = userName;
+      //   document.querySelector('#edit-email').value = userEmail;
+      //   document.querySelector('#edit-role').value = userRole;
+    });
+    });
  });
      
 
