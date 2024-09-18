@@ -18,7 +18,7 @@ p.then((response)=>{
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>${user.role}</td>
-        <td><button id="edit"><i class="fa-solid fa-pen-to-square"></i></button></td>
+        <td><button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i></button></td>
         <td><button id="del"><i class="fa-solid fa-trash"></i></button></td>`;
 
         tablebody.appendChild(row);
@@ -113,7 +113,7 @@ p.then((response)=>{
            data = updatedData;
       });
     });
-
+ //add events to delete buttons//
     const delbutton= document.querySelectorAll("#del");
     delbutton.forEach((button)=>{
       button.addEventListener("click",(event)=>{
@@ -124,21 +124,42 @@ p.then((response)=>{
       });
     });
 
-    const edit= document.querySelectorAll("#edit");
-    edit.forEach((button)=>{
-      button.addEventListener("click",(event)=>{
-         const row= event.target.closest("tr");
-         const userId = row.children[1].textContent;
-         const userName =row.children[2].textContent;
-         const userEmail =row.children[3].textContent;
-         const userRole =row.children[4].textContent;
 
-      //    document.querySelector('#edit-id').value = userId;
-      //   document.querySelector('#edit-name').value = userName;
-      //   document.querySelector('#edit-email').value = userEmail;
-      //   document.querySelector('#edit-role').value = userRole;
-    });
-    });
- });
+// Add events to edit buttons
+document.querySelectorAll(".edit-btn").forEach(button => {
+   button.addEventListener("click", (event) => {
+       const row = event.target.closest("tr");
+       const nameCell = row.children[2];
+       const emailCell = row.children[3];
+       const roleCell = row.children[4];
+       const isEditing = button.textContent.trim() === 'Save';
+
+       if (isEditing) {
+           // Save changes
+           const newName = nameCell.querySelector('input').value;
+           const newEmail = emailCell.querySelector('input').value;
+           const newRole = roleCell.querySelector('input').value;
+
+           nameCell.textContent = newName;
+           emailCell.textContent = newEmail;
+           roleCell.textContent = newRole;
+
+           // Update data array
+           const userId = row.children[1].textContent;
+           data = data.map(user => user.id === userId ? { ...user, name: newName, email: newEmail, role: newRole } : user);
+
+           button.textContent = 'Edit';
+       } else {
+           // Enter edit mode
+           nameCell.innerHTML = `<input type="text" value="${nameCell.textContent}">`;
+           emailCell.innerHTML = `<input type="text" value="${emailCell.textContent}">`;
+           roleCell.innerHTML = `<input type="text" value="${roleCell.textContent}">`;
+
+           button.textContent = 'Save';
+       }
+   });
+});
+   });
+
      
 
