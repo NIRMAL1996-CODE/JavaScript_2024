@@ -6,8 +6,8 @@ let result = document.querySelector(".result");
 
 countbtn.addEventListener("click", ()=>{
     let count=0;
-     let str= string.value.toLowerCase();;
-     let character =char.value.toLowerCase();;
+     let str= string.value.toLowerCase();
+     let character =char.value.toLowerCase();
 
      for(let i =0; i<str.length; i++)
      {
