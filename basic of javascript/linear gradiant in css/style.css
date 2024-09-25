@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* linear gradient */
+/*section{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(45deg, red,yellow);
+
+    background-image: linear-gradient(to right top, 
+    red,
+    yellow,
+    blue,
+    green); 
+    background-image: linear-gradient(to right, red,yellow);
+     background-image: linear-gradient(to left, red,yellow);
+    background-image: linear-gradient(to top, red,yellow);
+    background-image: linear-gradient(to bottom right, red,yellow);
+    background-image: linear-gradient(to bottom, red,yellow);
+     
+} */
+
+/* Radial gradient */
+section{
+    width: 100%;
+    height: 100vh;
+    /* background-image: radial-gradient(circle,blue, red,yellow); */
+    /* background-image: radial-gradient(circle,rgb(115, 115, 221) 20%, rgb(233, 118, 118) 20%,rgb(234, 234, 118)); */
+    background-image: repeating-radial-gradient(green, grey, orange 250px);
+
+}
