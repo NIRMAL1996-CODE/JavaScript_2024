@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+section{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+img{
+    margin: 10px;
+    
+    width: 50%;
+    height: 50vh;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+   filter: grayscale();   /* converted colored image into gray*/
+    /*filter: blur(5px);    create blur effects */
+   /* filter: brightness(150%); 100% is default so you can decrease it or extend from 100 as well
+   filter: contrast(150%);  100% is default so you can decrease it or extend from 100 (its just focus on colors to make them light or dark
+   filter: invert(); 
+   filter: hue-rotate();
+   filter: opacity(); relate to transparency*/
+}
