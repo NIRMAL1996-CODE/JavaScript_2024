@@ -1,10 +1,10 @@
 
 //local storage//
-// const UsersData = "user_data";
+// const UsersData = "userdata";
 
 //fetching data //
-let promise = fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
-promise.then((response)=>{
+let p = fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
+p.then((response)=>{
     if(!response.ok)
      {
        throw new Error("Network response is not ok"+response.statusText);
@@ -15,19 +15,20 @@ promise.then((response)=>{
     }
 }).then((data)=>{
     //Check if there's data in local storage
-    /* 
+   /* console.log(data);
     let storedData = localStorage.getItem(UsersData);
-    if (storedData) {
+    if (storedData) 
+      {
         data = JSON.parse(storedData); // Use data from local storage if available
-    } else {
+      } 
+    else 
+    {
         localStorage.setItem(UsersData, JSON.stringify(data)); // Store fetched data in local storage
-    }
-    */
+    }*/
 
-    //Since search, edit, delete, pagination, etc., 
-    //typically depend on the fetched data, these actions should be handled inside the .then() block.
-    //lets create the rows in table//
-const tablebody = document.querySelector(".tbody");
+  //table body
+    const tablebody = document.querySelector(".tbody");
+//lets create the rows in table//
 const createRows =(data)=>{
     tablebody.innerHTML='';//this is used to empty data from table//
     //loop for row for all users//
@@ -46,11 +47,10 @@ const createRows =(data)=>{
      // Add event to delete button for this row
      const deleteButton = row.querySelector('.del-btn');
      deleteButton.addEventListener('click', () => {
-         row.remove(); // Remove the row from the table
-         data=data.filter(u => u.id !== user.id); // Update the data
-         createRows(data);
-      
-    //    localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+     row.remove(); // Remove the row from the table
+     data=data.filter(u => u.id !== user.id); // Update the data
+     //localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+       
     });
     
     
@@ -71,12 +71,11 @@ const createRows =(data)=>{
         row.children[2].textContent = user.name; // Update name cell
         row.children[3].textContent = user.email; // Update email cell
         row.children[4].textContent = user.role; // Update role cell
-    //  localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+       // localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
     });
   });
 };
-   createRows(data);
-
+    createRows(data);
   //adding event to search button
   const searchbutton =document.querySelector(".searchbtn");
   const searchText= document.querySelector(".search");
@@ -96,12 +95,13 @@ const createRows =(data)=>{
       if(filteredData.length===0)
         {
         alert("No Matches found , Try again")
-        displayPage(1);
+        displayPage(currentPage);
         }
-        else
+        else 
         {
         createRows(filteredData);
         }
+      
   });
  
    //events to checkboxes
@@ -173,13 +173,13 @@ selectALLcheckboxes.forEach((checkbox)=>{
   const row= checkbox.closest("tr");
   const userId = row.children[1].textContent; 
   row.remove();
-  data.filter(user => user.id !== userId);
+  data=data.filter(user => user.id !== userId);
   
 });
-// localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
-});
-
+    displayPage(currentPage);  
+//localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+  });
 })
 .catch((error)=>{
-    console.error("there is an error: ", error);
+    console.error("There is an error: ", error);
 });
