@@ -12,7 +12,7 @@ p.then((response)=>{
     else
     {
       return response.json();
-    }
+     }
 }).then((data)=>{
     //Check if there's data in local storage
    console.log(data);
