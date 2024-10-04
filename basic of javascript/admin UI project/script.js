@@ -1,6 +1,6 @@
 localStorage.removeItem('userdata');
 //local storage//
-const UsersData = "userdata";
+const UsersData =  "userdata";
 
 //fetching data //
 let p = fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
