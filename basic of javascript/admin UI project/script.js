@@ -1,6 +1,6 @@
-
+localStorage.removeItem('userdata');
 //local storage//
-// const UsersData = "userdata";
+const UsersData = "userdata";
 
 //fetching data //
 let p = fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
@@ -15,7 +15,7 @@ p.then((response)=>{
     }
 }).then((data)=>{
     //Check if there's data in local storage
-   /* console.log(data);
+   console.log(data);
     let storedData = localStorage.getItem(UsersData);
     if (storedData) 
       {
@@ -24,7 +24,7 @@ p.then((response)=>{
     else 
     {
         localStorage.setItem(UsersData, JSON.stringify(data)); // Store fetched data in local storage
-    }*/
+    }
 
   //table body
     const tablebody = document.querySelector(".tbody");
@@ -49,8 +49,8 @@ const createRows =(data)=>{
      deleteButton.addEventListener('click', () => {
      row.remove(); // Remove the row from the table
      data=data.filter(u => u.id !== user.id); // Update the data
-     //localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
-       
+     localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+     createRows(data);
     });
     
     
@@ -71,22 +71,22 @@ const createRows =(data)=>{
         row.children[2].textContent = user.name; // Update name cell
         row.children[3].textContent = user.email; // Update email cell
         row.children[4].textContent = user.role; // Update role cell
-       // localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+        localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
     });
   });
 };
     createRows(data);
+
   //adding event to search button
   const searchbutton =document.querySelector(".searchbtn");
   const searchText= document.querySelector(".search");
-
   searchbutton.addEventListener("click",()=>{
       const searchword= searchText.value.toLowerCase().trim(); //.value is used retrieves the current text entered in the input field.
       if(searchword==="")
         {
         return alert("Please enter text for search");
         }
-
+      //filter data based on search term
       const filteredData= data.filter((user)=>{
       const field =[user.id,user.name,user.email,user.role];
         return field.some(field=>field.toLowerCase().includes(searchword));
@@ -95,11 +95,9 @@ const createRows =(data)=>{
       if(filteredData.length===0)
         {
         alert("No Matches found , Try again")
-        displayPage(currentPage);
         }
-        else 
-        {
-        createRows(filteredData);
+        else{
+          createRows(filteredData);
         }
       
   });
@@ -174,10 +172,8 @@ selectALLcheckboxes.forEach((checkbox)=>{
   const userId = row.children[1].textContent; 
   row.remove();
   data=data.filter(user => user.id !== userId);
-  
 });
-    displayPage(currentPage);  
-//localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
   });
 })
 .catch((error)=>{
