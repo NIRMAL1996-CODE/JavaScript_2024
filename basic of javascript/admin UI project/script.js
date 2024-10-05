@@ -1,32 +1,32 @@
 localStorage.removeItem('userdata');
-//local storage//
 const UsersData =  "userdata";
 
-//fetching data //
+//fetching data and handling local storage//
 let p = fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
 p.then((response)=>{
     if(!response.ok)
      {
        throw new Error("Network response is not ok"+response.statusText);
-     }
-    else
-    {
+     } else {
       return response.json();
      }
 }).then((data)=>{
     //Check if there's data in local storage
-   console.log(data);
     let storedData = localStorage.getItem(UsersData);
     if (storedData) 
       {
         data = JSON.parse(storedData); // Use data from local storage if available
-      } 
-    else 
-    {
-        localStorage.setItem(UsersData, JSON.stringify(data)); // Store fetched data in local storage
+      } else {
+      localStorage.setItem(UsersData, JSON.stringify(data)); // Store fetched data in local storage
     }
+    adminUI(data);
+  })
+    .catch((error)=>{
+      console.error("There is an error: ", error);
+  });
 
-  //table body
+ //this function contains all DOM-related code
+ function adminUI(data){
     const tablebody = document.querySelector(".tbody");
 //lets create the rows in table//
 const createRows =(data)=>{
@@ -44,34 +44,42 @@ const createRows =(data)=>{
         <td><button class="del-btn"><i class="fa-solid fa-trash"></i></button></td>`;
     tablebody.appendChild(row);
 
-     // Add event to delete button for this row
-     const deleteButton = row.querySelector('.del-btn');
-     deleteButton.addEventListener('click', () => {
-     row.remove(); // Remove the row from the table
+     // create a function to delete rows 
+     function deleteUser(user, data, row){
+      row.remove(); // Remove the row from the table
      data=data.filter(u => u.id !== user.id); // Update the data
      localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
      createRows(data);
+     }
+     //Add event to delete button for this row
+     const deleteButton = row.querySelector('.del-btn');
+     deleteButton.addEventListener('click', () => {
+      deleteUser(user, data, row)
     });
     
-    
+    // create a function to edit rows 
+    function editrows(user, row){
+       // Prompt user for new data
+       const newName = prompt("Enter new name:", user.name);
+       const newEmail = prompt("Enter new email:", user.email);
+       const newRole = prompt("Enter new role:", user.role);
+       
+       // Update the user object
+       if (newName) user.name = newName;
+       if (newEmail) user.email = newEmail;
+       if (newRole) user.role = newRole;
+
+       // Update the row
+       row.children[2].textContent = user.name; // Update name cell
+       row.children[3].textContent = user.email; // Update email cell
+       row.children[4].textContent = user.role; // Update role cell
+       localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+
+    }
     // Add event to edit button for this row
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => {
-        // Prompt user for new data
-        const newName = prompt("Enter new name:", user.name);
-        const newEmail = prompt("Enter new email:", user.email);
-        const newRole = prompt("Enter new role:", user.role);
-        
-        // Update the user object
-        if (newName) user.name = newName;
-        if (newEmail) user.email = newEmail;
-        if (newRole) user.role = newRole;
-
-        // Update the row
-        row.children[2].textContent = user.name; // Update name cell
-        row.children[3].textContent = user.email; // Update email cell
-        row.children[4].textContent = user.role; // Update role cell
-        localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+      editrows(user, row);
     });
   });
 };
@@ -95,11 +103,9 @@ const createRows =(data)=>{
       if(filteredData.length===0)
         {
         alert("No Matches found , Try again")
-        }
-        else{
+        }else{
           createRows(filteredData);
         }
-      
   });
  
    //events to checkboxes
@@ -174,8 +180,6 @@ selectALLcheckboxes.forEach((checkbox)=>{
   data=data.filter(user => user.id !== userId);
 });
 localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
-  });
-})
-.catch((error)=>{
-    console.error("There is an error: ", error);
 });
+};
+
