@@ -1,14 +1,17 @@
+//Local Storage
 localStorage.removeItem('userdata');
 const UsersData =  "userdata";
 
 //fetching data and handling local storage//
-let p = fetch("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json");
+//import APIurl from config.js
+import { APIurl } from "./config.js";// import api url
+let p= fetch(APIurl);
 p.then((response)=>{
     if(!response.ok)
      {
        throw new Error("Network response is not ok"+response.statusText);
      } else {
-      return response.json();
+      return response.json(); 
      }
 }).then((data)=>{
     //Check if there's data in local storage
@@ -28,6 +31,14 @@ p.then((response)=>{
  //this function contains all DOM-related code
  function adminUI(data){
     const tablebody = document.querySelector(".tbody");
+    const searchbutton =document.querySelector(".searchbtn");
+    const searchText= document.querySelector(".search");
+    const selectALLcheckbox= document.querySelector(".selectAll");
+    const firstPage = document.querySelector("#firstpage");
+    const previousPage = document.querySelector("#previouspage");
+    const nextPage = document.querySelector("#nextpage");
+    const lastPage = document.querySelector("#lastpage");
+
 //lets create the rows in table//
 const createRows =(data)=>{
     tablebody.innerHTML='';//this is used to empty data from table//
@@ -55,10 +66,10 @@ const createRows =(data)=>{
      const deleteButton = row.querySelector('.del-btn');
      deleteButton.addEventListener('click', () => {
       deleteUser(user, data, row)
-    });
+     });
     
-    // create a function to edit rows 
-    function editrows(user, row){
+     // create a function to edit rows 
+     function editrows(user, row){
        // Prompt user for new data
        const newName = prompt("Enter new name:", user.name);
        const newEmail = prompt("Enter new email:", user.email);
@@ -74,8 +85,7 @@ const createRows =(data)=>{
        row.children[3].textContent = user.email; // Update email cell
        row.children[4].textContent = user.role; // Update role cell
        localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
-
-    }
+       }
     // Add event to edit button for this row
     const editButton = row.querySelector('.edit-btn');
     editButton.addEventListener('click', () => {
@@ -83,11 +93,9 @@ const createRows =(data)=>{
     });
   });
 };
-    createRows(data);
+    createRows(data);//call createrow()function to create rows in table//
 
   //adding event to search button
-  const searchbutton =document.querySelector(".searchbtn");
-  const searchText= document.querySelector(".search");
   searchbutton.addEventListener("click",()=>{
       const searchword= searchText.value.toLowerCase().trim(); //.value is used retrieves the current text entered in the input field.
       if(searchword==="")
@@ -109,7 +117,6 @@ const createRows =(data)=>{
   });
  
    //events to checkboxes
-   const selectALLcheckbox= document.querySelector(".selectAll");
    selectALLcheckbox.addEventListener("change",()=>{
    const rowcheckbox= document.querySelectorAll(".rowcheckbox");
    rowcheckbox.forEach((checkbox)=>{
@@ -118,11 +125,6 @@ const createRows =(data)=>{
    });
 
     //create pagination 
-    const firstPage = document.querySelector("#firstpage");
-    const previousPage = document.querySelector("#previouspage");
-    const nextPage = document.querySelector("#nextpage");
-    const lastPage = document.querySelector("#lastpage");
-
     const itemsInPage= 10;
     let currentPage= 1;
     const totalPages= Math.ceil(data.length/ itemsInPage);
@@ -170,16 +172,17 @@ displayPage(currentPage);
 });
 
 //add events to deleteALLselected button
+function deleteselected(){
+  const selectALLcheckboxes= document.querySelectorAll(".rowcheckbox:checked");
+  selectALLcheckboxes.forEach((checkbox)=>{
+    const row= checkbox.closest("tr");
+    const userId = row.children[1].textContent; 
+    row.remove();
+    data=data.filter(user => user.id !== userId);
+  });
+  localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
+};
 const del =document.querySelector(".deleteselected");
-del.addEventListener("click",()=>{
-const selectALLcheckboxes= document.querySelectorAll(".rowcheckbox:checked");
-selectALLcheckboxes.forEach((checkbox)=>{
-  const row= checkbox.closest("tr");
-  const userId = row.children[1].textContent; 
-  row.remove();
-  data=data.filter(user => user.id !== userId);
-});
-localStorage.setItem(UsersData, JSON.stringify(data)); // Update local storage
-});
+del.addEventListener("click",deleteselected);
 };
 
